@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Final Page</title>
+</head>
+
+<body style="text-align:center; margin-top:100px;">
+
+<h2>YES or NO - It's your choice</h2>
+
+<button onclick="sendResponse('YES')" 
+style="padding:15px 30px; font-size:18px; background:green; color:white; border:none; border-radius:10px;">
+YES
+</button>
+
+<button onclick="sendResponse('NO')" 
+style="padding:15px 30px; font-size:18px; background:red; color:white; border:none; border-radius:10px; margin-left:15px;">
+NO
+</button>
+
+<script>
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbxyXYQ91I40csfI5kpCHJD2tm7WQfluE3dPbFucEfZxE4qQ8MhUgonUz3oRic2jLNHW/exec";
+
+function sendResponse(choice){
+  console.log("Clicked:", choice); // 👈 debug
+
+  fetch(scriptURL + "?choice=" + choice)
+  .then(response => response.text())
+  .then(data => {
+    console.log("Response:", data);
+
+    if(choice === "YES"){
+      window.location.href = "thankyou.html";
+    } else {
+      alert("Okay 🙂 Bye!");
+      window.location.href = "about:blank";
+    }
+  })
+  .catch(err => {
+    console.log("ERROR:", err);
+    alert("Error! Check console");
+  });
+}
+
+</script>
+
+</body>
+</html>
